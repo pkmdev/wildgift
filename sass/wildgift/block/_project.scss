@@ -1,0 +1,245 @@
+$arrow-color: $primary-color;
+$arrow-border: 0.1em;
+
+div.wp-block-wildgift-project {
+  background: #000;
+  color: #fff;
+  width: 100vw;
+  padding: 0 2%;
+  margin-left: calc(50% - 50vw);
+  display: grid;
+  grid-template-columns: $grid-pattern;
+  grid-template-areas:
+    ". video ."
+    "content . .";
+
+  #video-player {
+    grid-area: video;
+    width:100vw;
+    margin-left: calc(50% - 50vw);
+
+    //background-color: $background-color;
+    @media screen and (min-width: $breakpoint-sm) {
+      height: #{"max(calc(100vh - 400px), 150px)"};
+    }
+    @media screen and (max-width: $breakpoint-sm) {
+      display: none;
+      position: fixed;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index: 100;
+      background: $background-color;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      #close-video-player {
+        position: absolute;
+        top: 15px;
+        left: 7.5px;
+        width: 20px;
+        height: 20px;
+        background-image: url('img/back.png');
+        background-size:contain;
+        filter:invert(1);
+        display: none;
+        cursor: pointer;
+      }
+
+      &[data-vimeo-initialized="true"] #close-video-player {
+        display: block;
+      }
+
+    }
+    iframe {
+      width: 100%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+  div.video-selector {
+    position: relative;
+    grid-area: content / span 3;
+    width:100%;
+    max-width:$max-width;
+    margin-left:auto;
+    margin-right:auto;
+    padding:3em 0;;
+
+    display: grid;
+    grid-template-columns: 10% 16% 64% 10%;
+    grid-template-areas:". about carousel .";
+
+    @media screen and (max-width: $breakpoint-sm) {
+      padding:0;
+      grid-template-columns: 100%;
+      grid-template-areas:  "carousel"
+                            "about";
+    }
+
+    .projects__about {
+      grid-area: about;
+  		height:6em;
+  		line-height: 1em;
+      padding-left:2em;
+      margin-top:1em;
+  		position:relative;
+      font-weight:700;
+      @media screen and (max-width: $breakpoint-sm) {
+        position: absolute;
+        top:100%;
+        height:1em;
+        margin-top:2.5em;
+        padding-left:5%;
+        color:$background-color;
+      }
+
+
+      @media screen and (min-width: $breakpoint-sm) {
+
+    		&:after, &:before {
+    	    content: "";
+    	    display: block;
+    	    position: absolute;
+    	  }
+
+    		&:before {
+    	    top: 0em;
+    	    left: .5em;
+    	    width: .5em;
+    	    height: .5em;
+    	    transform-origin: 50% 50%;
+    	    transform:  translate(0, 4.8em) rotate(135deg);
+    	    box-shadow: inset -#{$arrow-border} $arrow-border 0 0 $arrow-color;
+    	    border-radius: 0 .5em*0.15 0 0;
+    	  }
+
+    	  &:after {
+    	    top: 0em;
+    	    left: .5em;
+    	    width: $arrow-border;
+    	    height: 4em * 1.3;
+    	    transform:  translate( calc(#{.5em - $arrow-border} / 2), 0);
+    	    background-color: $arrow-color;
+    	  }
+      }
+  	}
+
+    .projects__carousel {
+      grid-area: carousel;
+      position:relative;
+      @media screen and (max-width: $breakpoint-sm) {
+        display: flex;
+        flex-flow:column nowrap;
+      }
+      button.slick-prev, button.slick-next {
+        position:absolute;
+        border:0;
+        background:transparent;
+        top:calc(50% - .5em);
+        height:1.5em;
+        color: $primary-color;
+        cursor:pointer;
+
+      }
+      button:focus {
+        outline:none;
+      }
+      button.slick-prev {
+        left:-.5em;
+        width: 0;
+        height: 0;
+        line-height: 0;
+        border-top: .5em solid transparent;
+        border-bottom: .5em solid transparent;
+        border-right: .5em solid rgba(255, 255, 255, .5);
+        padding: 0;
+        &:hover {
+          border-right: .5em solid rgba(255, 255, 255, .8);
+        }
+
+      }
+      button.slick-next {
+        right:-.5em;
+        width: 0;
+        height: 0;
+        line-height: 0;
+        border-top: .5em solid transparent;
+        border-bottom: .5em solid transparent;
+        border-left: .5em solid rgba(255, 255, 255, .5);
+        padding: 0;
+        &:hover {
+            border-left: .5em solid rgba(255, 255, 255, .8);
+        }
+      }
+
+      .slick-track {
+        display:flex;
+        flex-flow: row nowrap;
+        width:auto !important;
+      }
+
+      .slick-list {
+        overflow:hidden;
+      }
+
+      .project__inner {
+        flex: 0 0 25%;
+        padding: 0 .5em;
+        position: relative;
+        height: calc(120px + 1em);
+        width: 100%;
+        @media screen and (max-width: $breakpoint-sm) {
+          flex: 0 0 auto;
+          height:200px;
+        }
+
+        .project__inner__video {
+          position: absolute;
+          top:.5em;
+          left:.5em;
+          bottom:.5em;
+          right:.5em;
+          background-size: cover;
+          background-position: center;
+          padding: .5em;
+          height:120px;
+          @media screen and (max-width: $breakpoint-sm) {
+            height:200px;
+            position: relative;
+            width:calc(100% - 1em);
+            padding:0;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+          }
+
+          img {
+            object-fit: cover;
+            width:100%;
+            height:100%;
+          }
+
+          &:after {
+            content:'';
+            position: absolute;
+            left:0;
+            top:0;
+            bottom:0;
+            right:0;
+            background-color:rgba(0,0,0,0);
+            transition:background $transition-time ease;
+          }
+          &:hover {
+            &:after {
+              background-color:rgba(0,0,0,.3);
+            }
+          }
+        }
+      }
+    }
+  }
+}

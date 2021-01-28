@@ -1,0 +1,15 @@
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $secondary-color;
+  }
+  &:focus {
+    border-bottom: 1px dotted $secondary-color;
+  }
+}
+
+.invert__color a {
+  color: $background-color
+}

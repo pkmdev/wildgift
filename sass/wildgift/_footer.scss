@@ -1,0 +1,107 @@
+footer.site__footer {
+  width:100%;
+  padding-left:$side-padding;
+  padding-right:$side-padding;
+  color: $primary-color;
+  font-size: .75em;
+  font-weight: 400;
+  line-height: 1.5em;
+  padding-bottom:1.5em;
+  @media screen and (max-width: $breakpoint-sm) {
+    display: none;
+  }
+
+  .footer__inner {
+    width:100%;
+    display:grid;
+    grid-template-columns: $grid-pattern;
+    grid-template-areas:". footer .";
+    max-width:$max-width;
+    margin-left:auto;
+    margin-right:auto;
+    @media screen and (max-width: $breakpoint-sm) {
+      grid-template-columns: 5% 90% 5%;
+    }
+
+    .footer__content {
+      grid-area:footer;
+      display: grid;
+      grid-template-columns: 30% 5% 30% auto;
+      grid-template-areas:
+        "leftrule . rightrule ."
+        "address . social .";
+      @media screen and (max-width: 992px) {
+        grid-template-columns: 55% 5% 35% 5%;
+        grid-template-areas:
+          "leftrule leftrule . rightrule"
+          "address . social";
+      }
+      @media screen and (max-width: $breakpoint-sm) {
+        grid-template-columns: 100%;
+        grid-template-areas:
+          "leftrule"
+          "address"
+          "rightrule"
+          "social";
+      }
+
+    }
+    .footer__rule {
+      border-top: 1px solid $primary-color;
+      width:100%;
+    }
+    .footer__rule__left {
+      grid-area: leftrule;
+      margin-right:auto;
+    }
+    .footer__rule__right {
+      grid-area: rightrule;
+      margin-left:auto;
+    }
+
+    .footer__address {
+      grid-area: address;
+      padding-top:1em;
+      @media screen and (max-width: $breakpoint-sm) {
+        padding-bottom:1em;
+      }
+    }
+
+    .footer__email {
+      grid-area: email;
+      padding-top:1em;
+      text-align: right;
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .footer__social {
+      grid-area: social;
+      padding-top:1em;
+      ul {
+        list-style: none;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items:flex-start;
+        justify-content: flex-start;
+        padding:0;
+        margin:0;
+        li {
+          flex: 0 0 60px;
+        }
+        img {
+          max-height: 1.8em;
+          height:100%;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+body #page.home footer.site__footer {
+  position:absolute;
+  bottom:1.5em;
+  left:0;
+}
